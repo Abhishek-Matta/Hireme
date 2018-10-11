@@ -23,9 +23,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "C:/Users/DELL/Desktop/abc/Hireme/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "C:/Users/DELL/Desktop/abc/Hireme/node_modules/jquery/dist/jquery.min.js",
+              "C:/Users/DELL/Desktop/abc/Hireme/node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

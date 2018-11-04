@@ -1,0 +1,81 @@
+<br><br><br><br><br><br>
+
+<div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-4">
+    <b>Skills</b><hr>
+    <form>
+      <div class="checkbox">
+        <label><input type="checkbox" name="html" [(ngModel)]="b[1]" (click)="changeInArray(html,1)">HTML</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="css" [(ngModel)]="b[2]" (click)="changeInArray(css,2)">CSS</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox"  name="js" [(ngModel)]="b[3]" (click)="changeInArray(js,3)">Javascript</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="angular" [(ngModel)]="b[4]" (click)="changeInArray(ang,4)">Angular</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="mongo" [(ngModel)]="b[5]" (click)="changeInArray(mongo,5)">MongoDB</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="express" [(ngModel)]="b[6]" (click)="changeInArray(express,6)">Express</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="node" [(ngModel)]="b[7]" (click)="changeInArray(node,7)">Node.js</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="php" [(ngModel)]="b[8]" (click)="changeInArray(php,8)">PHP</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="android" [(ngModel)]="b[9]" (click)="changeInArray(android,9)">Android</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="ios" [(ngModel)]="b[10]" (click)="changeInArray(ios,10)">iOS</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="logo-design" [(ngModel)]="b[11]" (click)="changeInArray(logo_design,11)">Logo Design</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="data-entry" [(ngModel)]="b[12]" (click)="changeInArray(data_entry,12)">Data Entry</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="mysql" [(ngModel)]="b[13]" (click)="changeInArray(mysql,13)">MySQL</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="web-hosting" [(ngModel)]="b[14]" (click)="changeInArray(web_hosting,14)">Web Hosting</label>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="software-testing" [(ngModel)]="b[15]" (click)="changeInArray(software_testing,15)">Software Testing</label>
+      </div>
+
+    </form>
+  </div>
+  <div class="col-sm-6">
+    <div *ngIf="!filter">
+     
+    <div *ngFor="let p of projects">
+       <div class="panel panel-default">
+        <div class="panel-heading">{{p.title}}</div>
+        <div class="panel-body">{{p.description}}</div>
+        <div class="panel-footer">{{p.skills}}</div>
+      </div>
+    </div>
+    </div>
+
+    <div *ngIf="filter">
+      
+        <div *ngFor="let d of da">
+           <div class="panel panel-default">
+            <div class="panel-heading">{{d.title}}</div>
+            <div class="panel-body">{{d.description}}</div>
+            <div class="panel-footer">{{d.skills}}</div>
+          </div>
+        </div>
+        </div>
+    
+  </div>
+  <div class="col-sm-1"></div>
+</div>

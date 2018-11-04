@@ -1,0 +1,76 @@
+<h2>Hire Me</h2>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+            <h1>Tell us what you need done</h1>
+            <p>Contact skilled freelancers within minutes.
+              View profiles, ratings, portfolios and chat with them.
+              Pay the freelancer only when you are 100% satisfied with their work.
+            </p>
+
+ 
+        <form #postProjectForm="ngForm" (ngSubmit)="projectsub(postProjectForm.value)">
+          <div class="form-group">
+              <h3> <label for="project name">Choose a name for your project:</label></h3>
+            <input type="text" class="form-control" name="title" #title="ngModel" ngModel required>
+          </div>
+          <div class="form-group">
+              <h3><label for="description">Tell us more about your project:</label></h3>
+            <p>Start with a bit about yourself or your business, and include an overview of what you need done.</p>
+            <textarea class="form-control" name="description" #description="ngModel" ngModel required></textarea>
+          </div>
+          <div class="form-group">
+            <!-- <input type="file" name="file to upload" (change)="onFileUpload($event)" #fileInput="ngModel" ngModel required> -->
+          </div>
+
+          <button type="button" class="btn btn-default" (click)="show1()" *ngIf="!show1var">Next</button>
+          
+          <div class="form-group" *ngIf="show1var">
+              <h3> <label for="skills">What skills are required?</label></h3>
+            <p>Start with a bit about yourself or your business, and include an overview of what you need done.
+               Enter up to 5 skills that best describe your project.
+               Freelancers will use these skills to find projects they are most interested and experienced in.</p>
+               <select multiple class="form-control" #skills="ngModel" name="skills" ngModel required>
+                  <option>HTML</option>
+                  <option>CSS</option>
+                  <option>Javascript</option>
+                  <option>Angular</option>
+                  <option>MongoDB</option>
+                  <option>Express.js</option>
+                  <option>Node.js</option>
+                  <option>PHP</option>
+                  <option>Android</option>
+                  <option>iOS</option>
+                  <option>Logo Design</option>
+                  <option>Data Entry</option>
+                  <option>Wordpress</option>
+                  <option>MySQL</option>
+                  <option>Web Hosting</option>
+                  <option>Software Testing</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-default" (click)="show2()" *ngIf="show1var&&(!show2var)">Next</button>
+
+            <div class="form-group" *ngIf="show2var">
+                <h3><label for="budget">What is your estimated budget?</label></h3>
+                <p><b>NOTE</b>:We only support Indian National Rupees(INR).</p>
+                <div class="input-group">
+                    <span class="input-group-addon">INR</span>
+                    <input type="text" class="form-control" name="budget" #budget="ngModel" ngModel required>
+                </div>
+            </div>
+
+            <h3 *ngIf="show2var">Are you sure about project details?</h3>
+
+            <button type="submit" class="btn btn-warning" *ngIf="show2var&&(!show3var)">Yes, Post the Project</button>
+
+             
+        </form>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>

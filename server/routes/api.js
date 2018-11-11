@@ -56,7 +56,8 @@ router.post('/login', function(req, res, next) {
             message: 'Successfully logged in',
             token: token,
             success:true,
-            userId: user._id
+            userId: user._id,
+            expiresIn : 7200
         });
     });
 });
@@ -126,5 +127,7 @@ router.get('/getoneproject/:id', function (req, res) {
         }
     })
 });
+
+
 
 module.exports = router;

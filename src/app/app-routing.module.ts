@@ -6,15 +6,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PostProjectComponent } from './post-project/post-project.component';
 import { BrowseProjectsComponent } from './browse-projects/browse-projects.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
-  {path:'home', component:HomeComponent},
+  {path:'home', component:HomeComponent, },
   {path:'signup', component:SignupComponent},
   {path:'login',component:LoginComponent},
-  {path:'dashboard', component:DashboardComponent},
-  {path:'post-project', component:PostProjectComponent},
-  {path:'browse-projects', component:BrowseProjectsComponent}
+  {path:'dashboard', component:DashboardComponent,canActivate:[AuthGuard]},
+  {path:'post-project', component:PostProjectComponent, canActivate:[AuthGuard]},
+  {path:'browse-projects', component:BrowseProjectsComponent }
 ];
 
 @NgModule({

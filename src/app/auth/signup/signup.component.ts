@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import {Router } from '@angular/router';
+import { AuthService } from "../auth.service";
+
 
 
 
@@ -12,18 +11,10 @@ import {Router } from '@angular/router';
 })
 export class SignupComponent {
 
-  constructor(private http:HttpClient,private router:Router){}
+  constructor(private authService:AuthService){}
 
     signupsub(form){
-      this.http.post('/api',{
-       
-        email:form.email,
-        password:form.password,
-    }).subscribe((res:any)=>{
-        
-        console.log(res.message)
-        // this.router.navigate(['/dashboard']);
-    })
+      this.authService.createUser(form.value.email,form.value.password);
   }
 }
   

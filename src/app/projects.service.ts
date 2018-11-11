@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProjectsService {
-  private url = "/api/getprojects/";
+  private url = "/api/getprojects";
   constructor(private http:HttpClient) { }
 
   getprojects():Observable<{success: Boolean, message: String, projects:IProject[]}>{

@@ -13,6 +13,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PostProjectComponent } from './post-project/post-project.component';
 import { BrowseProjectsComponent } from './browse-projects/browse-projects.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,7 @@ import { DepositComponent } from './deposit/deposit.component';
 
 
   ],
-  providers: [],
+  providers: [AuthGuard,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

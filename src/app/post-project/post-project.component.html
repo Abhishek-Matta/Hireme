@@ -1,4 +1,4 @@
-<h2>Hire Me</h2>
+<h2 routerLink="/home" routerLinkActive="active">Hire Me</h2>
 <br>
 <br>
 
@@ -59,8 +59,11 @@
             <div class="form-group" *ngIf="show2var">
                 <h3><label for="budget">What is your estimated budget?</label></h3>
                 <p><b>NOTE</b>:We only support Indian National Rupees(INR).</p>
-                <div class="input-group">
-                    <span class="input-group-addon">INR</span>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">INR</span>
+                  </div>
+                    
                     <input type="text" class="form-control" name="budget" #budget="ngModel" ngModel required>
                 </div>
             </div>

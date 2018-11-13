@@ -13,8 +13,8 @@ const routes: Routes = [
   {path:'home', component:HomeComponent, },
   {path:'signup', component:SignupComponent},
   {path:'login',component:LoginComponent},
-  {path:'dashboard', component:DashboardComponent,canActivate:[AuthGuard]},
-  {path:'post-project', component:PostProjectComponent, canActivate:[AuthGuard]},
+  {path:'dashboard', component:DashboardComponent},
+  {path:'post-project', component:PostProjectComponent},
   {path:'browse-projects', component:BrowseProjectsComponent }
 ];
 

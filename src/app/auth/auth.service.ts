@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { AuthData } from "./auth-data.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
     private token: string;
-    private expiresIn: number;
+    private decodedToken: any;
     constructor(private http: HttpClient, private router: Router) {}
 
     createUser(email: string, password: string) {
@@ -32,17 +33,22 @@ export class AuthService {
             console.log(response);
             const token = response.token;
             this.token = token;
-
-            const expiresIn = response.expiresIn
-            this.expiresIn = expiresIn;
-            
             localStorage.setItem("token", token);
-            localStorage.setItem("expiration", expiresIn.toString());
-            
             if(token)
             {
               this.router.navigate(['/dashboard'])
             }
+            const helper = new JwtHelperService();
+            this.decodedToken = helper.decodeToken(this.token);
+            
           })
+
                  }
+
+          
+            token$(){
+                 
+                  return this.decodedToken.asObservable();
+                  
+                }
     }

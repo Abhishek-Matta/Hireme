@@ -1,25 +1,31 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+      .ml-c{
+        margin-left: 50rem !important;
+      }
+    </style>
+</head>
+<nav class="navbar navbar-expand-sm navbar-light" style="height:70px;">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">HireMe</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a routerLink="/post-project" routerLinkActive="active">Hire</a></li>
-      <li><a routerLink="/browse-projects" routerLinkActive="active">Work</a></li>
-      <li><a routerLink="/help" routerLinkActive="active">Help</a></li>
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/browse-projects" routerLinkActive="active">Work</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a></li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="/deposit" routerLinkActive="active">Balance<span class="glyphicon glyphicon-triangle-bottom"></span></a></li>
-      <li><a><span class="glyphicon glyphicon-comment"></span></a></li>
-      <li><a><span class="glyphicon glyphicon-bell"></span></a></li>
-      <li><a><span class="glyphicon glyphicon-list"></span></a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
-         <ul class="dropdown-menu">
-           <li><a (click)="logout()" >Logout</a></li>
-         </ul>
+    <ul class="navbar-nav ml-c">
+      <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
+      <li class="nav-item"><a class="nav-link"><span class="fa fa-comment"></span></a></li>
+      <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li>
+      <li class="nav-item"><a class="nav-link"><span class="fa fa-list"></span></a></li>
+      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span></a>
+         <div class="dropdown-menu">
+           <li><a class="dropdown-item" (click)="logout()" >Logout</a></li>
+         </div>
       </li>
     </ul>
-  </div>
 </nav>
 
 <div class="row">
@@ -41,8 +47,8 @@
       <div class="col-sm-4"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png"></div>
       <div class="col-sm-6">
         Welcome back,
-        <h2>Username</h2>
-        <button>Set up your Profile</button>
+        <h2>{{dt}}</h2>
+        <button (click)="cc()">Set up your Profile</button>
       </div>
       <div class="col-sm-1"></div>
     </div>

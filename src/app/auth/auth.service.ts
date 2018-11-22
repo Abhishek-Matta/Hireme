@@ -53,8 +53,8 @@ export class AuthService {
 
             }
 
-            bidsubmit( bidAmount:number, timeDuration:number, userId:string){
-              const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId};
+            bidsubmit( bidAmount:number, timeDuration:number, userId:string, title:string){
+              const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId,title:title};
               this.http.post('/api/submitbid', bidData).subscribe(response=>{
                 console.log(response);
               })
@@ -65,7 +65,7 @@ export class AuthService {
           this.router.navigate(['/home']);
         }
 
-        getbids(): Observable<{success: Boolean, message: String, bids:IBids[]}>{
+        getbids():Observable<{success: Boolean, message: String, bids:IBids[]}>{
           let url = "/api/getbids";
           return this.http.get<{success: Boolean, message: String, bids:IBids[]}>(url)
     

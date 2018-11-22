@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IBids } from '../bids';
+import { ProjectsService } from '../projects.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,9 @@ import { IBids } from '../bids';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private dt;
+  private userEmail;
   private token: string;
   public id: string;
-  private bids: IBids[] =[];
   specific_bids : IBids[]=[];
   userbidded :boolean;
 
@@ -25,36 +25,37 @@ export class DashboardComponent implements OnInit {
      const helper = new JwtHelperService();
      this.id = localStorage.getItem('userId');
      const decodedToken = helper.decodeToken(this.token);
-     this.dt=decodedToken.user.email;
+     this.userEmail=decodedToken.user.email;
+
+    
 
      this.authService.getbids()
      .subscribe(data=>{
-      this.bids = data.bids;
+      
+      for(let i=0;i<data.bids.length;i++){
+      
+        if(data.bids[i].userId===this.id)
+        {
+          this.specific_bids.push(data.bids[i]);
+          this.userbidded=true;
+        }
+        else{
+          this.userbidded=false;
+        }
+    }
+      
      });
-     
-     for(let i=0;i<this.bids.length;i++){
-        
-      if(this.bids[i].userId===this.id)
-      {
-        console.log('uoi');
-        this.specific_bids.push(this.bids[i]);
-        this.userbidded=true;
-      }
-      else{
-        this.userbidded=false;
-      }
-  }
+    
+ 
     
    }
  
     
     
-    filterBids(){
-     
-    }
+   
 
     ss(){
-      console.log(this.specific_bids);
+      // console.log(this.userbidded);
     }
     routeToWork(){
       this.router.navigate(['/browse-projects',this.id]);

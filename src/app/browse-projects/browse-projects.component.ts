@@ -21,7 +21,7 @@ export class BrowseProjectsComponent implements OnInit{
         this.projects = data.projects;
         this.id = this.route.snapshot.params['id']
 
-      });
+      }); 
   }
 
   private filter:boolean =false;
@@ -120,8 +120,8 @@ filterProjects(){
 
 }
 
-submitbid(form){
- this.authService.bidsubmit(form.bidAmount, form.timeDuration, this.id );
+submitbid(form,title){
+ this.authService.bidsubmit(form.bidAmount, form.timeDuration, this.id,title );
 }
 
 logout(){

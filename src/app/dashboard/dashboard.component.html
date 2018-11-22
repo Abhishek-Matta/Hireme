@@ -13,7 +13,7 @@
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
       <li class="nav-item"><a class="nav-link" (click)="routeToWork()">Work</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a></li>
+      
     </ul>
     <ul class="navbar-nav ml-c">
       <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
@@ -32,7 +32,7 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-6">
     <h3>Recent Projects</h3><hr>
-    <div *ngIf="userbidded; then thenBlock;" >
+    <div *ngIf="userbidded; else elseBlock">
       <div *ngFor="let b of specific_bids">
           <table class="table">
               <thead>
@@ -44,16 +44,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>{{b.projectTitle}}</td>
+                  <td>{{b.title}}</td>
                   <td>{{b.bidAmount}}</td>
-                  <td>{{b.timeduration}}</td>
+                  <td>{{b.timeDuration}}</td>
                 </tr>
               </tbody>
             </table>
           </div>
     </div>
-    <ng-template #thenblock>
+    <ng-template #elseBlock>
        <p>No recent projects!</p>
       </ng-template>
     
@@ -69,8 +68,8 @@
       <div class="col-sm-4"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png"></div>
       <div class="col-sm-6">
         Welcome back,
-        <h2>{{dt}}</h2>
-        <button>Set up your Profile</button>
+        <h2>{{userEmail}}</h2>
+        <button (click)="ss()">Set up your Profile</button>
       </div>
       <div class="col-sm-1"></div>
     </div>

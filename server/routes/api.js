@@ -109,7 +109,8 @@ router.post('/submitbid' , function(req, res){
     var bid = new Bid({
         bidAmount:  req.body.bidAmount,
         timeDuration : req.body.timeDuration,
-        userId: req.body.userId
+        userId: req.body.userId,
+        title : req.body.title
     });
     bid.save(function(err, result){
         if(err){

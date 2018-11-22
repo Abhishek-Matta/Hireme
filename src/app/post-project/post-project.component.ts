@@ -45,14 +45,13 @@ export class PostProjectComponent implements OnInit {
       this.http.post('/api/postproject',{
          title:form.title,
          description:form.description,
-        //  file:this.myfile,
          skills:form.skills,
          budget:form.budget,
           token:this.token
       }).subscribe((res:any)=>{
           if(res.success){
               console.log('Project saved')
-              //this.router.navigate(['/']);
+              this.router.navigate(['/dashboard']);
           }
       })
   }

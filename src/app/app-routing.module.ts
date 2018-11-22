@@ -13,10 +13,10 @@ const routes: Routes = [
   {path:'home', component:HomeComponent, },
   {path:'signup', component:SignupComponent},
   {path:'login',component:LoginComponent},
-  {path:'dashboard', component:DashboardComponent},
+  {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
   {path:'post-project', component:PostProjectComponent},
-  {path:'browse-projects', component:BrowseProjectsComponent },
-  {path:'browse-projects/:id', component:BrowseProjectsComponent }
+  {path:'browse-projects', component:BrowseProjectsComponent,  canActivate:[AuthGuard]},
+  {path:'browse-projects/:id', component:BrowseProjectsComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

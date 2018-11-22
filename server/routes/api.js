@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-// var fs = require('file-system');
 
 var User = require('../modals/user');
 var Project = require('../modals/project');
+var Bid = require('../modals/bid');
 
 
 
@@ -17,7 +17,7 @@ router.post('/', function (req, res) {
     user.save(function(err, result) {
         if (err) {
             return res.status(500).json({
-                message: 'An error occurred',
+                message: 'An error occurred while creating user',
                 error: err
             });
         }
@@ -51,28 +51,22 @@ router.post('/login', function(req, res, next) {
                 error: {message: 'Wrong Password'}
             });
         }
-        var token = jwt.sign({user:user}, 'secret', {expiresIn: 7200});
+        var token = jwt.sign({user:user}, 'secret', {expiresIn: 3600});
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
             success:true,
             userId: user._id,
-            expiresIn : 7200
+            expiresIn : 3600
         });
     });
 });
 
 router.post('/postproject', function (req, res) {
     var decode=jwt.verify(req.body.token,'secret');
-    // var fileData = fs.readFile('req.body.file',  function (err) {
-    //     if(err){
-    //        console.log(err);
-    //     }
-    // });
     var project = new Project({
         title:req.body.title,
         description:req.body.description,
-        // file: fileData,
         skills: req.body.skills,
         budget: req.body.budget,
         userid:decode.user._id
@@ -110,24 +104,43 @@ router.get('/getprojects/', function (req, res) {
     })
 });
 
-router.get('/getoneproject/:id', function (req, res) {
-    Project.findById(req.params.id).exec((err,data)=>{
+
+router.post('/submitbid' , function(req, res){
+    var bid = new Bid({
+        bidAmount:  req.body.bidAmount,
+        timeDuration : req.body.timeDuration,
+        userId: req.body.userId
+    });
+    bid.save(function(err, result){
         if(err){
             return res.status(500).json({
-                message: 'An error occurred while finding one project',
+                message : 'error while submitting bid',
+                error : err
+            })
+        }
+        res.status(201).json({
+            message: 'Bid submited',
+            obj: result
+        });
+    });
+});
+
+router.get('/getbids/', function (req, res) {
+    Bid.find({}).exec((err,data)=>{
+        if(err){
+            return res.status(500).json({
+                message: 'Error occurred while finding bids',
                 error: err
             });
         }
         else{
             res.status(201).json({
                 success:true,
-                message: 'One project',
-                projects: data
+                message: 'All bids',
+                bids: data
             }); 
         }
     })
 });
-
-
 
 module.exports = router;

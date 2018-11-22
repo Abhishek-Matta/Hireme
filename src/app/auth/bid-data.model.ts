@@ -1,0 +1,5 @@
+export interface BidData{
+    bidAmount: number;
+    timeDuration: number;
+    userId :string;
+}

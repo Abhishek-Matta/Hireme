@@ -7,10 +7,15 @@
     </style>
 </head>
 <body style="background-color:#f0f0f0;">
-<nav class=" navbar navbar-expand-sm bg-light navbar-light" style="height:70px;">
+<nav class=" navbar navbar-expand-lg bg-light navbar-light" style="height:70px;">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">HireMe</a>
     </div>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/browse-projects" routerLinkActive="active">Work</a></li>
@@ -27,6 +32,7 @@
          </div>
       </li>
     </ul>
+    </div>
 </nav>
 <br><br><br>
 
@@ -88,10 +94,19 @@
     <div *ngIf="!filter">
      
     <div *ngFor="let p of projects">
-       <div class="card">
-        <div class="card-header">{{p.title}}</div>
-        <div class="card-body">{{p.description}}</div>
-        <div class="card-footer">{{p.skills}}</div>
+     <div class="card">
+            <div class="card-header">
+              <div class="d-flex justify-content-start">{{p.title}}</div>
+              <div class="d-flex justify-content-end"><i>Rs.</i><b>{{p.budget}}</b></div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-start">{{p.description}}</div>
+            <div class="d-flex justify-content-end">
+              <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-white" ><b>Bid</b></button>
+
+            </div>
+          </div>
+            <div class="card-footer">{{p.skills}}</div>
       </div><br>
     </div>
     </div>
@@ -100,8 +115,18 @@
       
         <div *ngFor="let d of da">
            <div class="card">
-            <div class="card-header">{{d.title}}</div>
-            <div class="card-body">{{d.description}}</div>
+            <div class="card-header">
+              <div class=" justify-content-start">{{d.title}}</div>
+              <div class=" justify-content-end"><i>Rs.</i><b>{{d.budget}}</b></div>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-start">{{d.description}}</div>
+              <div class="d-flex justify-content-end">
+                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-white" ><b>Bid</b></button>
+
+              </div>
+
+            </div>
             <div class="card-footer">{{d.skills}}</div>
           </div><br>
         </div>
@@ -110,4 +135,42 @@
   </div>
   <div class="col-sm-1"></div>
 </div>
+
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title">Bid Proposal</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                  
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="alert alert-light">
+                                As a new freelancer, get started by bidding on two (2) projects.
+                                Be as detailed as possible when filling your proposal to increase your chances of being awarded the project. 
+                                Check out our Ten Tips for Writing an Effective Bid article to help you get started.
+                            </div>
+                                    <form #bidform="ngForm" (ngSubmit)= submitbid(bidform.value) class="form-inline mx-auto" >
+                                      <label for="bid">Bid Amount:</label>
+                                      <input type="text" class="form-control mb-2 mx-2 " id="bid" #bidAmount="ngModel" name="bidAmount" required ngModel>
+                                      <label for="time">Time Duration:</label>
+                                      <input type="text" class="form-control mb-2 mx-2 " id="time" #timeDuration="ngModel" name="timeDuration" required ngModel>
+                                      <button type="submit"  class="btn btn-primary text-white font-weight-bold mb-2">Submit Bid</button>
+                                    </form>
+                                
+                              
+                        </div>
+                  
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                  
+                      </div>
+                    </div>
+                  </div>
 </body>

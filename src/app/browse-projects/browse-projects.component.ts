@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ProjectsService } from '../projects.service';
 import { IProject } from '../project';
+import { AuthService } from '../auth/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,15 +11,16 @@ import { IProject } from '../project';
   styleUrls: ['./browse-projects.component.css']
 })
 export class BrowseProjectsComponent implements OnInit{
-
+  id: string;
   
-  constructor(private projectService:ProjectsService) {} 
+  constructor(private projectService:ProjectsService, private authService: AuthService, private route:ActivatedRoute) {} 
       
   ngOnInit() {
     this.projectService.getprojects()
       .subscribe(data=>{
         this.projects = data.projects;
-       
+        this.id = this.route.snapshot.params['id']
+
       });
   }
 
@@ -80,24 +83,13 @@ changeInArray(x:String,y:number){
     if(this.flag===false)
     {
       this.filter=false;
-      console.log('Reached in if block')
     }
     
   }
  
 }
 
-// cssInArray(){
-//   if(!(this.b[2]))
-//   this.arr.push("CSS");
-//   else
-//   {
-//     var index = this.arr.indexOf("CSS");
-//     if (index > -1) {
-//       this.arr.splice(index, 1);
-//     }
-//   }
-// }
+
 
 
 
@@ -126,5 +118,13 @@ filterProjects(){
   }
   
 
+}
+
+submitbid(form){
+ this.authService.bidsubmit(form.bidAmount, form.timeDuration, this.id );
+}
+
+logout(){
+  this.authService.logout();
 }
 }

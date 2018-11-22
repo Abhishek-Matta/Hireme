@@ -22,12 +22,25 @@
 
         <form #loginform="ngForm" (ngSubmit)= "loginsub(loginform)">
           <div class="form-group">
-            <input type="email" class="form-control form-control-lg" #email="ngModel" name="email" placeholder="Email" required ngModel>
+            <input type="email" class="form-control form-control-lg" #email="ngModel" name="email" placeholder="Email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" required ngModel>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control form-control-lg" #password="ngModel"  name="password" placeholder="Password" required ngModel>
+            <input type="password" class="form-control form-control-lg" #password="ngModel"  name="password" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required ngModel>
           </div>
 
+          <div *ngIf="email.errors">
+            <small *ngIf="email.errors.required && email.touched" class="btn-danger"><br>Email is required</small>
+            <small *ngIf="email.errors.pattern && email.dirty" class="btn-danger">
+                Invalid email address!
+            </small>
+        </div>
+
+        <div *ngIf="password.errors">
+          <small *ngIf="password.errors.required && password.touched" class="btn-danger"><br>Password is required</small>
+          <small *ngIf="password.errors.pattern && password.dirty" class="btn-info">
+            Password should contain minimum 8 characters, atleast one letter and one number.
+          </small>
+      </div>
           <button type="submit" class="btn btn-primary btn-block btn-lg"><b>Log In</b></button>
         </form>
 

@@ -12,13 +12,13 @@
     </div>
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/browse-projects" routerLinkActive="active">Work</a></li>
+      <li class="nav-item"><a class="nav-link" (click)="routeToWork()">Work</a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a></li>
     </ul>
     <ul class="navbar-nav ml-c">
       <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
       <li class="nav-item"><a class="nav-link"><span class="fa fa-comment"></span></a></li>
-      <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li>
+      <!-- <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li> -->
       <li class="nav-item"><a class="nav-link"><span class="fa fa-list"></span></a></li>
       <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span></a>
          <div class="dropdown-menu">
@@ -32,9 +32,31 @@
   <div class="col-sm-1"></div>
   <div class="col-sm-6">
     <h3>Recent Projects</h3><hr>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    Saepe architecto deserunt sequi minima vero, cumque rem porro. Delectus voluptas corrupti 
-    sit corporis quae, porro ratione consequatur quam tenetur, fugiat odio.</p>
+    <div *ngIf="userbidded; then thenBlock;" >
+      <div *ngFor="let b of specific_bids">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Project Title</th>
+                  <th scope="col">Bid Amount</th>
+                  <th scope="col">Time Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{b.projectTitle}}</td>
+                  <td>{{b.bidAmount}}</td>
+                  <td>{{b.timeduration}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+    <ng-template #thenblock>
+       <p>No recent projects!</p>
+      </ng-template>
+    
 
     <h3>News feed</h3><hr>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -48,7 +70,7 @@
       <div class="col-sm-6">
         Welcome back,
         <h2>{{dt}}</h2>
-        <button (click)="cc()">Set up your Profile</button>
+        <button>Set up your Profile</button>
       </div>
       <div class="col-sm-1"></div>
     </div>

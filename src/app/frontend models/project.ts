@@ -4,6 +4,6 @@
         title: string;
         description: string;
         budget: number;
-        userid: string;
+        userId: string;
         __v: number;
     }

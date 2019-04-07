@@ -1,0 +1,162 @@
+<app-header></app-header>
+<br><br>
+
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-2">
+    <div class="nav flex-column nav-pills" id="v-pills-tab">
+      <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" >Profile</a>
+      <a class="nav-link" id="v-pills-email-tab" data-toggle="pill" href="#v-pills-email" >Change email</a>
+      <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password">Change password</a>
+      <a class="nav-link" id="v-pills-account-tab" data-toggle="pill" href="#v-pills-account">Account</a>
+    </div>
+  </div>
+  <div class="col-1"></div>
+  <div class="col-7">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-profile" >
+            <div class="card">
+              <div class="card-body">
+                <h2>Update profile</h2>
+                <form #profileform="ngForm" (ngSubmit)= "profilesub(profileform)">
+                    <div class="form-group">
+                      <label>Firstname:</label>
+                      <input type="text" class="form-control form-control-lg" #firstname="ngModel" name="firstname" placeholder="Enter Firstname" minlength="2" required ngModel>
+                    </div>
+                    <div class="form-group">
+                      <label>Lastname:</label>
+                      <input type="text" class="form-control form-control-lg" #lastname="ngModel"  name="lastname" placeholder="Enter Lastname" minlength="2" required ngModel>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address:</label>
+                        <input type="email" class="form-control form-control-lg" #address="ngModel" name="address" placeholder="Enter address" minlength="20" required ngModel>
+                      </div>
+                      <div class="form-group">
+                          <label>City:</label>
+                          <input type="email" class="form-control form-control-lg" #city="ngModel" name="city" placeholder="Enter city" minlength="4" required ngModel>
+                        </div>
+                        <div class="form-group">
+                            <label>Zip/Post code:</label>
+                            <input type="email" class="form-control form-control-lg" #zip="ngModel" name="zip" placeholder="Enter zipcode" pattern="^[1-9][0-9]{5}$" required ngModel>
+                          </div>
+                          <div class="form-group">
+                              <label>State:</label>
+                              <input type="email" class="form-control form-control-lg" #state="ngModel" name="state" placeholder="Enter state" minlength="4" required ngModel>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Country:</label>
+                                <input type="email" class="form-control form-control-lg" value="India" disabled>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="pho">Phone number:</label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text">+91</span>
+                                    </div>
+                                  <input type="email" class="form-control form-control-lg" #phoneNumber="ngModel" name="phoneNumber" placeholder="Enter phone number" pattern="^((\+)?(\d{2}[-]))?(\d{10}){1}?$" required ngModel id="pho">
+                                </div>
+                              </div>
+
+                    <div *ngIf="firstname.errors">
+                      <small *ngIf="firstname?.errors.required && firstname.touched" class="btn-danger"><br>Firstname is required</small>
+                      <small *ngIf="firstname?.errors.minlength && firstname.dirty" class="btn-danger">
+                          Firstname should contain minimum 2 characters.
+                      </small>
+                  </div>
+
+                  <div *ngIf="lastname.errors">
+                    <small *ngIf="lastname?.errors.required && lastname.touched" class="btn-danger"><br>Lastname is required</small>
+                    <small *ngIf="lastname?.errors.minlength && lastname.dirty" class="btn-info">
+                      Lastname should contain minimum 8 characters, atleast one letter and one number.
+                    </small>
+                </div>
+
+                <div *ngIf="address.errors">
+                    <small *ngIf="address?.errors.required && address.touched" class="btn-danger"><br>Address is required</small>
+                    <small *ngIf="address?.errors.minlength && address.dirty" class="btn-info">
+                      Address should contain minimum 20 characters.
+                    </small>
+                </div>
+
+                <div *ngIf="city.errors">
+                    <small *ngIf="city?.errors.required && city.touched" class="btn-danger"><br>City is required</small>
+                    <small *ngIf="city?.errors.minimum && city.dirty" class="btn-info">
+                      City should contain minimum 4 characters.
+                    </small>
+                </div>
+
+                <div *ngIf="zip.errors">
+                    <small *ngIf="zip?.errors.required && zip.touched" class="btn-danger"><br>Zip is required</small>
+                    <small *ngIf="zip?.errors.pattern && zip.dirty" class="btn-info">
+                      Invalid zip code.
+                    </small>
+                </div>
+
+                <div *ngIf="state.errors">
+                    <small *ngIf="state?.errors.required && state.touched" class="btn-danger"><br>State is required</small>
+                    <small *ngIf="state?.errors.pattern && state.dirty" class="btn-info">
+                      State should contain minimum 4 characters.
+                    </small>
+                </div>
+
+                <div *ngIf="phoneNumber.errors">
+                    <small *ngIf="phoneNumber?.errors.required && phoneNumber.touched" class="btn-danger"><br>Phone is required</small>
+                    <small *ngIf="phoneNumber?.errors.pattern && phoneNumber.dirty" class="btn-info">
+                      Invalid phone number.
+                    </small>
+                </div>
+
+
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg text-center ">Update</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+      </div>
+      <div class="tab-pane fade" id="v-pills-email" >
+        <div class="card">
+          <div class="card-body">
+            <h1>Update Email</h1>
+                <form #uepform="ngForm" (ngSubmit)= "uepsub(uepform)">
+                    <div class="form-group">
+                      <label>New email:</label>
+                      <input type="text" class="form-control form-control-lg" #email="ngModel" name="email" placeholder="Enter email" pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" value="" required ngModel>
+                    </div>
+                    <div class="form-group">
+                      <label>Current Password:(if changing email)</label>
+                      <input type="password" class="form-control form-control-lg" #password="ngModel"  name="password" placeholder="Enter password"  required ngModel>
+                    </div>
+
+                    <button type="submit" class="btn btn-lg">Change email</button>
+                </form>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="v-pills-password">
+          <div class="form-group">
+              <label>Current password:</label>
+              <input type="text" class="form-control form-control-lg" #p1="ngModel" name="p1" required ngModel>
+            </div>
+            <div class="form-group">
+              <label>New password:</label>
+              <input type="password" class="form-control form-control-lg" #p2="ngModel"  name="p2" required ngModel>
+            </div>
+            <div class="form-group">
+                <label>Confirm new password:</label>
+                <input type="password" class="form-control form-control-lg" #p3="ngModel"  name="p3" required ngModel>
+              </div>
+
+              <button type="submit" class="btn btn-lg">Change password</button>
+      </div>
+      <div class="tab-pane fade" id="v-pills-account">
+        <h3>Close Account</h3>
+        <button type="button" class="btn">Close My Account</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>

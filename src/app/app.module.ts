@@ -13,8 +13,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PostProjectComponent } from './post-project/post-project.component';
 import { BrowseProjectsComponent } from './browse-projects/browse-projects.component';
 import { DepositComponent } from './deposit/deposit.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/services/auth.guard';
+import { AuthService } from './auth/services/auth.service';
+import { ChatService } from './services/chat.service';
+import { ChatPageComponent } from './chat-page/chat-page.component';
+import { HeaderComponent } from './header/header.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { AuthService } from './auth/auth.service';
     DashboardComponent,
     PostProjectComponent,
     BrowseProjectsComponent,
-    DepositComponent
+    DepositComponent,
+    ChatPageComponent,
+    HeaderComponent,
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -33,9 +41,8 @@ import { AuthService } from './auth/auth.service';
     FormsModule,
     HttpClientModule,
 
-
   ],
-  providers: [AuthGuard,AuthService],
+  providers: [AuthGuard,AuthService,ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

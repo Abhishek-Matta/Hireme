@@ -1,130 +1,139 @@
 import { Component, OnInit} from '@angular/core';
-import { ProjectsService } from '../projects.service';
-import { IProject } from '../project';
-import { AuthService } from '../auth/auth.service';
+import { ProjectsService } from '../services/projects.service';
+import { IProject } from '../frontend models/project';
+import { AuthService } from '../auth/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { BidService } from '../services/bid.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
   selector: 'app-browse-projects',
   templateUrl: './browse-projects.component.html',
-  styleUrls: ['./browse-projects.component.css']
+  styleUrls: []
 })
 export class BrowseProjectsComponent implements OnInit{
   id: string;
-  
-  constructor(private projectService:ProjectsService, private authService: AuthService, private route:ActivatedRoute) {} 
-      
+  private token: string;
+  private username: string;
+
+
+  constructor(private projectService:ProjectsService, private authService: AuthService,
+     private bidService:BidService, private route:ActivatedRoute) {}
+
   ngOnInit() {
     this.projectService.getprojects()
       .subscribe(data=>{
-        this.projects = data.projects;
+        this.allProjects = data.projects;
         this.id = this.route.snapshot.params['id']
 
-      }); 
+      });
+
+      this.token = localStorage.getItem('token');
+      const helper = new JwtHelperService();
+      this.id = localStorage.getItem('userId');
+      const decodedToken = helper.decodeToken(this.token);
+      this.username=decodedToken.user.username;
   }
 
-  private filter:boolean =false;
-  private da:IProject[]=[];
-  private projects:IProject[]=[];
-  private flag_project :boolean[]=[];
+  filter:boolean = false;
+  filteredProjects:IProject[]=[];
+  allProjects:IProject[]=[];
 
-  private arr: String[] =[];
-  private b:boolean[] =[];
-  private flag : boolean=false;
+  arrayOfSkills: String[] =[];
+  booleanArrayOfSkills: boolean[] =[];
+  flag : boolean=false;
 
-private html: String = "HTML";
-private css: String = "CSS";
-private js: String = "Javascript";
-private ang: String = "Angular";
-private mongo: String = "MongoDB";
-private express: String = "Express.js";
-private node: String = "Node.js";
-private php: String = "PHP";
-private android: String = "Android";
-private ios: String = "iOS";
-private logo_design: String = "Logo Design";
-private data_entry: String = "Data Entry";
-private mysql: String = "MySQL";
-private web_hosting: String = "Web Hosting";
-private software_testing: String = "Software Testing";
+html: String = "HTML";
+css: String = "CSS";
+js: String = "Javascript";
+ang: String = "Angular";
+mongo: String = "MongoDB";
+express: String = "Express.js";
+node: String = "Node.js";
+php: String = "PHP";
+android: String = "Android";
+ios: String = "iOS";
+logo_design: String = "Logo Design";
+data_entry: String = "Data Entry";
+mysql: String = "MySQL";
+web_hosting: String = "Web Hosting";
+  software_testing: String = "Software Testing";
 
-changeInArray(x:String,y:number){
-    this.da.forEach(e=>{
-      this.da.pop();
-  })
+  bidPlaced: Boolean = false;
 
-  if(!(this.b[y]))
+changeInArray(skill:String, skillNumber:number){
+    this.filteredProjects = [];
+
+  if(!(this.booleanArrayOfSkills[skillNumber]))
   {
-  this.arr.push(x);
+  this.arrayOfSkills.push(skill);
   this.filterProjects();
   this.filter=true;
   }
   else
   {
-    var index = this.arr.indexOf(x);
+    var index = this.arrayOfSkills.indexOf(skill);
     if (index > -1) {
-      this.arr.splice(index, 1);
+      this.arrayOfSkills.splice(index, 1);
     }
-    
-    this.b[y]=false;
 
-    for(let i=1;i<16;i++)
+    this.booleanArrayOfSkills[skillNumber]=false;
+
+    for(let i=1;i<15;i++)
     {
-      if(this.b[i]===true)
+      if(this.booleanArrayOfSkills[i]===true)
       {
-        this.filter=true;
+        this.filter = true;
         this.flag = true;
         this.filterProjects();
-        break; 
+        break;
       }
     }
-    
+
     if(this.flag===false)
     {
       this.filter=false;
     }
-    
+
   }
- 
+
 }
-
-
-
-
-
 
 
 
 filterProjects(){
-  for(let i=0;i<this.projects.length;i++)
+  for(let i=0;i<this.allProjects.length;i++)
   {
-    for(let j=0;j<this.projects[i].skills.length;j++)
+    for(let j=0;j<this.allProjects[i].skills.length;j++)
     {
-      for(let k=0;k<this.arr.length;k++)
+      for(let k=0;k<this.arrayOfSkills.length;k++)
       {
-        if(this.projects[i].skills[j]===this.arr[k])
+        if(this.allProjects[i].skills[j]===this.arrayOfSkills[k])
         {
-            this.da.push(this.projects[i]);
+            this.filteredProjects.push(this.allProjects[i]);
             break;
         }
-        if(this.flag_project[i]===true)
-        {
-        break;
-        }
       }
+      break;
     }
 
   }
-  
+
 
 }
 
 submitbid(form,title){
- this.authService.bidsubmit(form.bidAmount, form.timeDuration, this.id,title );
+  this.bidService.bidsubmit(form.bidAmount, form.timeDuration, form.bidDescription, this.id, title, this.username);
+  this.bidPlaced = true;
 }
 
 logout(){
   this.authService.logout();
 }
+
+bidPlacedFn() {
+  this.bidPlaced = false;
+}
+
 }

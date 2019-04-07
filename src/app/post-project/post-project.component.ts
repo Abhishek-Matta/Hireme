@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
+
 
 
 @Component({
   selector: 'app-post-project',
   templateUrl: './post-project.component.html',
-  styleUrls: ['./post-project.component.css']
+  styleUrls: []
 })
 export class PostProjectComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class PostProjectComponent implements OnInit {
     this.show1var = false;
     this.show1var = false;
   }
-  
+
   show1(){
     this.show1var = true;
   }
@@ -35,9 +35,6 @@ export class PostProjectComponent implements OnInit {
     this.show2var = true;
   }
 
-  // onFileUpload(){
-  //   this.myfile=
-  // }
 
   projectsub(form){
       this.token=localStorage.getItem('token')

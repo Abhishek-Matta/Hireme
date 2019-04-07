@@ -3,16 +3,17 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-var User = require('../modals/user');
-var Project = require('../modals/project');
-var Bid = require('../modals/bid');
+var User = require('../models/user');
+var Project = require('../models/project');
+var Bid = require('../models/bid');
 
 
 
 router.post('/', function (req, res) {
     var user = new User({
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10)
+        password: bcrypt.hashSync(req.body.password, 10),
+        username:req.body.username
     });
     user.save(function(err, result) {
         if (err) {
@@ -69,7 +70,7 @@ router.post('/postproject', function (req, res) {
         description:req.body.description,
         skills: req.body.skills,
         budget: req.body.budget,
-        userid:decode.user._id
+        userId:decode.user._id
     });
     project.save(function(err, result) {
         if (err) {
@@ -99,7 +100,7 @@ router.get('/getprojects/', function (req, res) {
                 success:true,
                 message: 'All Projects',
                 projects: data
-            }); 
+            });
         }
     })
 });
@@ -110,7 +111,9 @@ router.post('/submitbid' , function(req, res){
         bidAmount:  req.body.bidAmount,
         timeDuration : req.body.timeDuration,
         userId: req.body.userId,
-        title : req.body.title
+      title: req.body.title,
+      username: req.body.username,
+        bidDescription: req.body.bidDescription
     });
     bid.save(function(err, result){
         if(err){
@@ -139,7 +142,7 @@ router.get('/getbids/', function (req, res) {
                 success:true,
                 message: 'All bids',
                 bids: data
-            }); 
+            });
         }
     })
 });

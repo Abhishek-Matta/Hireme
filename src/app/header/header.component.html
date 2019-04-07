@@ -1,0 +1,53 @@
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<nav class="navbar navbar-expand-sm navbar-light" style="margin-bottom:0px; height: 70px;">
+
+  <div class="navbar-header">
+    <a class="navbar-brand" ><img src="../../assets/logo.png" width="145" height="46" alt="Hireme"></a>
+  </div>
+
+
+  <ul class="navbar-nav"  *ngIf="!userLoggedIn">
+    <li class="nav-item">
+        <a class="nav-link"> How It Works</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">Browse Jobs</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto"  *ngIf="!userLoggedIn">
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/login" routerLinkActive="active"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    </li>
+    <li class="nav-item">
+        <button class="btn btn-warning navbar-btn" style="margin-right:5px" routerLink="/post-project" routerLinkActive="active"><b class="text-white">Post a Project</b></button>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav" *ngIf="userLoggedIn">
+    <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/browse-projects/{{id}}" routerLinkActive="active">Work</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a></li>
+  </ul>
+
+  <ul class="navbar-nav ml-c" *ngIf="userLoggedIn">
+    <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
+    <li class="nav-item"><a class="nav-link"><span class="fa fa-comment"></span></a></li>
+    <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li>
+    <li class="nav-item"><a class="nav-link"><span class="fa fa-list"></span></a></li>
+    <li class="nav-item active dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" >{{username}}</a>
+       <div class="dropdown-menu">
+        <a class="dropdown-item" routerLink="/profile" routerLinkActive="active">My profile</a>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+       </div>
+      </li>
+  </ul>
+
+</nav>

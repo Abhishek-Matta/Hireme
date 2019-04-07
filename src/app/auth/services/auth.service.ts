@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
-import { AuthData } from "./auth-data.model";
-import { BidData } from "./bid-data.model";
-import { IBids } from "../bids";
+import { AuthData } from "../models/auth-data.model";
+import { BidData } from "../models/bid-data.model";
+import { IBids } from "../../frontend models/bids";
+import { AuthData2 } from "../models/auth-data2.model";
 
 
 @Injectable({ providedIn: "root" })
@@ -12,16 +13,15 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router) {}
 
-    createUser(email: string, password: string) {
-        const authData: AuthData = { email: email, password: password };
+    createUser(email: string, password: string, username:string) {
+        const authData2: AuthData2 = { email: email, password: password, username:username };
         this.http
-          .post("/api/", authData)
+          .post("/api/", authData2)
           .subscribe(response => {
             console.log(response);
           });
          this.router.navigate(['/login'])
       }
-                                                               
 
       login(email: string, password: string) {
         const authData: AuthData = { email: email, password: password };
@@ -32,7 +32,7 @@ export class AuthService {
           )
           .subscribe(response => {
             console.log(response);
-            const token = response.token;          
+            const token = response.token;
 
             if(token)
             {
@@ -48,17 +48,17 @@ export class AuthService {
               localStorage.setItem("userId",response.userId);
               localStorage.setItem("expiresIn", expirationDate.toISOString());
             }
-            
+
           })
 
             }
 
-            bidsubmit( bidAmount:number, timeDuration:number, userId:string, title:string){
-              const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId,title:title};
-              this.http.post('/api/submitbid', bidData).subscribe(response=>{
-                console.log(response);
-              })
-            }
+            // bidsubmit(  bidAmount:number, timeDuration:number, userId:string, title:string,  bidDescription: string, username:string)){
+            //   const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId,title:title, bidDescription: bidDescription, username: username};
+            //   this.http.post('/api/submitbid', bidData).subscribe(response=>{
+            //     console.log(response);
+            //   })
+            // }
 
          logout(){
           localStorage.clear();
@@ -68,6 +68,6 @@ export class AuthService {
         getbids():Observable<{success: Boolean, message: String, bids:IBids[]}>{
           let url = "/api/getbids";
           return this.http.get<{success: Boolean, message: String, bids:IBids[]}>(url)
-    
+
         }
     }

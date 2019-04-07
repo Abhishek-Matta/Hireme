@@ -1,41 +1,7 @@
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <style>
-      .ml-c{
-        margin-left: 50rem !important;
-      }
-    </style>
-</head>
+
 <body style="background-color:#f0f0f0;">
-<nav class=" navbar navbar-expand-lg bg-light navbar-light" style="height:70px;">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">HireMe</a>
-    </div>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-    <ul class="navbar-nav">
-      <li class="nav-item"><a class="nav-link" routerLink="/post-project" routerLinkActive="active">Hire</a></li>
-      <li class="nav-item"><a class="nav-link" routerLink="/browse-projects" routerLinkActive="active">Work</a></li>
-
-    </ul>
-    <ul class="navbar-nav ml-c">
-      <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
-      <li class="nav-item"><a class="nav-link"><span class="fa fa-comment"></span></a></li>
-      <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li>
-      <li class="nav-item"><a class="nav-link"><span class="fa fa-list"></span></a></li>
-      <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span></a>
-         <div class="dropdown-menu">
-           <li><a class="dropdown-item" (click)="logout()" >Logout</a></li>
-         </div>
-      </li>
-    </ul>
-    </div>
-</nav>
+<app-header></app-header>
 <br><br><br>
-
 
 <div class="row">
   <div class="col-sm-1"></div>
@@ -43,57 +9,57 @@
     <b>Skills</b><hr>
     <form>
       <div class="checkbox">
-        <label><input type="checkbox" name="html" [(ngModel)]="b[1]" (click)="changeInArray(html,1)">HTML</label>
+        <label><input type="checkbox" name="html" [(ngModel)]="booleanArrayOfSkills[1]" (click)="changeInArray(html,1)">HTML</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="css" [(ngModel)]="b[2]" (click)="changeInArray(css,2)">CSS</label>
+        <label><input type="checkbox" name="css" [(ngModel)]="booleanArrayOfSkills[2]" (click)="changeInArray(css,2)">CSS</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox"  name="js" [(ngModel)]="b[3]" (click)="changeInArray(js,3)">Javascript</label>
+        <label><input type="checkbox"  name="js" [(ngModel)]="booleanArrayOfSkills[3]" (click)="changeInArray(js,3)">Javascript</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="angular" [(ngModel)]="b[4]" (click)="changeInArray(ang,4)">Angular</label>
+        <label><input type="checkbox" name="angular" [(ngModel)]="booleanArrayOfSkills[4]" (click)="changeInArray(ang,4)">Angular</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="mongo" [(ngModel)]="b[5]" (click)="changeInArray(mongo,5)">MongoDB</label>
+        <label><input type="checkbox" name="mongo" [(ngModel)]="booleanArrayOfSkills[5]" (click)="changeInArray(mongo,5)">MongoDB</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="express" [(ngModel)]="b[6]" (click)="changeInArray(express,6)">Express</label>
+        <label><input type="checkbox" name="express" [(ngModel)]="booleanArrayOfSkills[6]" (click)="changeInArray(express,6)">Express</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="node" [(ngModel)]="b[7]" (click)="changeInArray(node,7)">Node.js</label>
+        <label><input type="checkbox" name="node" [(ngModel)]="booleanArrayOfSkills[7]" (click)="changeInArray(node,7)">Node.js</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="php" [(ngModel)]="b[8]" (click)="changeInArray(php,8)">PHP</label>
+        <label><input type="checkbox" name="php" [(ngModel)]="booleanArrayOfSkills[8]" (click)="changeInArray(php,8)">PHP</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="android" [(ngModel)]="b[9]" (click)="changeInArray(android,9)">Android</label>
+        <label><input type="checkbox" name="android" [(ngModel)]="booleanArrayOfSkills[9]" (click)="changeInArray(android,9)">Android</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="ios" [(ngModel)]="b[10]" (click)="changeInArray(ios,10)">iOS</label>
+        <label><input type="checkbox" name="ios" [(ngModel)]="booleanArrayOfSkills[10]" (click)="changeInArray(ios,10)">iOS</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="logo-design" [(ngModel)]="b[11]" (click)="changeInArray(logo_design,11)">Logo Design</label>
+        <label><input type="checkbox" name="logo-design" [(ngModel)]="booleanArrayOfSkills[11]" (click)="changeInArray(logo_design,11)">Logo Design</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="data-entry" [(ngModel)]="b[12]" (click)="changeInArray(data_entry,12)">Data Entry</label>
+        <label><input type="checkbox" name="data-entry" [(ngModel)]="booleanArrayOfSkills[12]" (click)="changeInArray(data_entry,12)">Data Entry</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="mysql" [(ngModel)]="b[13]" (click)="changeInArray(mysql,13)">MySQL</label>
+        <label><input type="checkbox" name="mysql" [(ngModel)]="booleanArrayOfSkills[13]" (click)="changeInArray(mysql,13)">MySQL</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="web-hosting" [(ngModel)]="b[14]" (click)="changeInArray(web_hosting,14)">Web Hosting</label>
+        <label><input type="checkbox" name="web-hosting" [(ngModel)]="booleanArrayOfSkills[14]" (click)="changeInArray(web_hosting,14)">Web Hosting</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" name="software-testing" [(ngModel)]="b[15]" (click)="changeInArray(software_testing,15)">Software Testing</label>
+        <label><input type="checkbox" name="software-testing" [(ngModel)]="booleanArrayOfSkills[15]" (click)="changeInArray(software_testing,15)">Software Testing</label>
       </div>
 
     </form>
   </div>
   <div class="col-sm-7">
     <div *ngIf="!filter">
-     
-    <div *ngFor="let p of projects">
+
+    <div *ngFor="let p of allProjects">
      <div class="card">
             <div class="card-header">
               <div class="d-flex justify-content-start">{{p.title}}</div>
@@ -103,45 +69,63 @@
               <div class="d-flex justify-content-start">{{p.description}}</div>
             <div class="d-flex justify-content-end">
               <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-white" ><b>Bid</b></button>
-              <!-- The Modal -->
-             <div class="modal" id="myModal">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-            
-                  <!-- Modal Header -->
-                  <div class="modal-header">
-                    <h4 class="modal-title">Bid Proposal</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  </div>
-            
-                  <!-- Modal body -->
-                  <div class="modal-body">
-                      <div class="alert alert-light">
-                          As a new freelancer, get started by bidding on two (2) projects.
-                          Be as detailed as possible when filling your proposal to increase your chances of being awarded the project. 
-                          Check out our Ten Tips for Writing an Effective Bid article to help you get started.
-                      </div>
-                              <form #bidform="ngForm" (ngSubmit)= submitbid(bidform.value,p.title) class="form-inline mx-auto" >
-                                <label for="bid">Bid Amount:</label>
-                                <input type="text" class="form-control mb-2 mx-2 " id="bid" #bidAmount="ngModel" name="bidAmount" required ngModel>
-                                <label for="time">Time Duration:</label>
-                                <input type="text" class="form-control mb-2 mx-2 " id="time" #timeDuration="ngModel" name="timeDuration" required ngModel>
-                                <button type="submit"  class="btn btn-primary text-white font-weight-bold mb-2">Submit Bid</button>
-                              </form>
-                          
-                        
-                  </div>
-            
-                  <!-- Modal footer -->
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  </div>
-            
-                </div>
+               <!-- The Modal -->
+               <div class="modal" id="myModal">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Bid Proposal</h4>
+                      <button type="button" class="close" data-dismiss="modal" (click)="bidPlacedFn()">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="alert alert-light">
+                            As a new freelancer, get started by bidding on two (2) projects.
+                            Be as detailed as possible when filling your proposal to increase your chances of being awarded the project.
+                            Check out our Ten Tips for Writing an Effective Bid article to help you get started.
+                        </div>
+                                <form #bidform="ngForm" (ngSubmit)= submitbid(bidform.value,p.title)>
+                                  <div class="form-group">
+                                    <label for="bid">Bid Amount:</label>
+                                    <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">Rs.</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="bid" #bidAmount="ngModel" name="bidAmount" required ngModel>
+                                  </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="time">Time Duration:</label>
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" id="time" #timeDuration="ngModel" name="timeDuration" required ngModel>
+                                    <div class="input-group-append">
+                                      <span class="input-group-text">Days</span>
+                                    </div>
+                                  </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="desc">Description:</label>
+                                    <textarea class="form-control" rows="5" #bidDescription="ngModel" name="bidDescription" ngModel></textarea>
+                                  </div>
+                                  <button type="submit"  class="btn btn-primary text-white font-weight-bold mb-2" >Place Bid</button>
+                                </form>
+                                <div *ngIf="bidPlaced">
+                                  <p style="color: darkgreen; text-align: center; font-weight: bold;">You have successfully placed the bid!</p>
+                                </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="bidPlacedFn()">Close</button>
+                    </div>
+
               </div>
             </div>
+          </div>
             </div>
-             
+
           </div>
             <div class="card-footer">{{p.skills}}</div>
       </div><br>
@@ -149,65 +133,83 @@
     </div>
 
     <div *ngIf="filter">
-      
-        <div *ngFor="let d of da">
+
+        <div *ngFor="let p of filteredProjects">
            <div class="card">
             <div class="card-header">
-              <div class="d-flex justify-content-start">{{d.title}}</div>
-              <div class="d-flex justify-content-end"><i>Rs.</i><b>{{d.budget}}</b></div>
+              <div class="d-flex justify-content-start">{{p.title}}</div>
+              <div class="d-flex justify-content-end"><i>Rs.</i><b>{{p.budget}}</b></div>
             </div>
             <div class="card-body">
-              <div class="d-flex justify-content-start">{{d.description}}</div>
+              <div class="d-flex justify-content-start">{{p.description}}</div>
               <div class="d-flex justify-content-end">
                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-white" ><b>Bid</b></button>
-                
-                <!-- The Modal -->
-                <div class="modal" id="myModal">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                
-                      <!-- Modal Header -->
-                      <div class="modal-header">
-                        <h4 class="modal-title">Bid Proposal</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                
-                      <!-- Modal body -->
-                      <div class="modal-body">
-                          <div class="alert alert-light">
-                              As a new freelancer, get started by bidding on two (2) projects.
-                              Be as detailed as possible when filling your proposal to increase your chances of being awarded the project. 
-                              Check out our Ten Tips for Writing an Effective Bid article to help you get started.
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Bid Proposal</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
-                                  <form #bidform="ngForm" (ngSubmit)= submitbid(bidform.value,d.title) class="form-inline mx-auto" >
-                                    <label for="bid">Bid Amount:</label>
-                                    <input type="text" class="form-control mb-2 mx-2 " id="bid" #bidAmount="ngModel" name="bidAmount" required ngModel>
-                                    <label for="time">Time Duration:</label>
-                                    <input type="text" class="form-control mb-2 mx-2 " id="time" #timeDuration="ngModel" name="timeDuration" required ngModel>
-                                    <button type="submit"  class="btn btn-primary text-white font-weight-bold mb-2">Submit Bid</button>
-                                  </form>
-                              
-                            
-                      </div>
-                
-                      <!-- Modal footer -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                      </div>
-                
+
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                              <div class="alert alert-light">
+                                  As a new freelancer, get started by bidding on two (2) projects.
+                                  Be as detailed as possible when filling your proposal to increase your chances of being awarded the project.
+                                  Check out our Ten Tips for Writing an Effective Bid article to help you get started.
+                              </div>
+                                      <form #bidform="ngForm" (ngSubmit)= submitbid(bidform.value,p.title)>
+                                        <div class="form-group">
+                                          <label for="bid">Bid Amount:</label>
+                                          <div class="input-group">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text">Rs.</span>
+                                          </div>
+                                          <input type="text" class="form-control" id="bid" #bidAmount="ngModel" name="bidAmount" required ngModel>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="time">Time Duration:</label>
+                                          <div class="input-group">
+                                          <input type="text" class="form-control" id="time" #timeDuration="ngModel" name="timeDuration" required ngModel>
+                                          <div class="input-group-append">
+                                            <span class="input-group-text">Days</span>
+                                          </div>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="desc">Description:</label>
+                                          <textarea class="form-control" rows="5" #bidDescription="ngModel" name="bidDescription" required ngModel></textarea>
+                                        </div>
+                                        <button type="submit"  class="btn btn-primary text-white font-weight-bold mb-2">Place Bid</button>
+                                      </form>
+
+
+                          </div>
+
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="card-footer">{{d.skills}}</div>
+            <div class="card-footer">{{p.skills}}</div>
           </div><br>
         </div>
         </div>
-    
+
   </div>
   <div class="col-sm-1"></div>
 </div>
 
-              
+
 </body>

@@ -5,7 +5,10 @@ const bidSchema = new Schema({
     bidAmount: {type: String, required: true},
     timeDuration: {type: String, required: true},
     userId: {type: String, required: true},
-    title: {type: String, required: true}
+  title: { type: String, required: true },
+  bidDescription: { type: String, required: true },
+  username: { type: String, required: true }
+
 });
 
 

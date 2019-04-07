@@ -8,7 +8,7 @@ const projectSchema = new Schema({
     // file: {type: file },
     skills: [String],
     budget:{type:Number, required:true},
-    userid:{type:String}
+    userId:{type:String}
 });
 
 projectSchema.plugin(mongooseUniqueValidator);

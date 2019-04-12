@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const path=require('path');
 var bodyParser=require('body-parser');
 var app=express();
-var api=require('./server/routes/api.js');
+var api=require('./server/routes/api');
 
 //Database connection
 mongoose.connect("mongodb://abhi:abhipw1@ds139331.mlab.com:39331/hireme",{ useNewUrlParser: true, useCreateIndex: true});
@@ -34,7 +34,7 @@ app.get('*',function(req,res){
     res.sendFile('index.html', { root:path.join(__dirname, 'dist/Hireme')})
 });
 
-//Listening on port 4000 
+//Listening on port 4000
 var server = app.listen(4000,function(){
 console.log("Listening on port 4000..")
 });
@@ -52,11 +52,11 @@ socket.on('join', function(data){
 
     console.log(data.user + ' joined the room : ' + data.room);
 
-    socket.broadcast.to(data.room).emit('new user joined', {user:data.user, message:'has joined this room.'});
+  socket.broadcast.to(data.room).emit('new user joined', {user: data.user + ' is online :::::'});
   });
 
   socket.on('leave', function(data){
-    
+
     console.log(data.user + 'left the room : ' + data.room);
 
     socket.broadcast.to(data.room).emit('left room', {user:data.user, message:'has left this room.'});

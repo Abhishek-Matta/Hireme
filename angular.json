@@ -25,7 +25,8 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "src/styles.css"
+              "src/styles.css", //css for toastr notifications is here
+              //"node_modules/ngx-toastr/toastr.css" // this did not work
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

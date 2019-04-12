@@ -1,13 +1,17 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-<nav class="navbar navbar-expand-sm navbar-light" style="margin-bottom:0px; height: 70px;">
+<nav class="navbar navbar-expand-sm navbar-light justify-content-between" style="margin-bottom:0px; height: 70px;">
 
   <div class="navbar-header">
     <a class="navbar-brand" ><img src="../../assets/logo.png" width="145" height="46" alt="Hireme"></a>
   </div>
 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
   <ul class="navbar-nav"  *ngIf="!userLoggedIn">
     <li class="nav-item">
         <a class="nav-link"> How It Works</a>
@@ -36,7 +40,7 @@
     <li class="nav-item"><a class="nav-link" routerLink="/help" routerLinkActive="active">Help</a></li>
   </ul>
 
-  <ul class="navbar-nav ml-c" *ngIf="userLoggedIn">
+  <ul class="navbar-nav mr-4" *ngIf="userLoggedIn">
     <li class="nav-item"><a class="nav-link" routerLink="/deposit" routerLinkActive="active">Balance<span class="fa fa-angle-down"></span></a></li>
     <li class="nav-item"><a class="nav-link"><span class="fa fa-comment"></span></a></li>
     <li class="nav-item"><a class="nav-link"><span class="fa fa-bell"></span></a></li>
@@ -49,5 +53,5 @@
        </div>
       </li>
   </ul>
-
+</div>
 </nav>

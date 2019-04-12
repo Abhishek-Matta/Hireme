@@ -13,7 +13,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: []
 })
 export class BrowseProjectsComponent implements OnInit{
-  id: string;
+  userId: string;
   private token: string;
   private username: string;
 
@@ -25,13 +25,13 @@ export class BrowseProjectsComponent implements OnInit{
     this.projectService.getprojects()
       .subscribe(data=>{
         this.allProjects = data.projects;
-        this.id = this.route.snapshot.params['id']
+        this.userId = this.route.snapshot.params['id']
 
       });
 
       this.token = localStorage.getItem('token');
       const helper = new JwtHelperService();
-      this.id = localStorage.getItem('userId');
+      // this.id = localStorage.getItem('userId');
       const decodedToken = helper.decodeToken(this.token);
       this.username=decodedToken.user.username;
   }
@@ -124,7 +124,7 @@ filterProjects(){
 }
 
 submitbid(form,title){
-  this.bidService.bidsubmit(form.bidAmount, form.timeDuration, form.bidDescription, this.id, title, this.username);
+  this.bidService.bidsubmit(form.bidAmount, form.timeDuration, form.bidDescription, this.userId, title, this.username);
   this.bidPlaced = true;
 }
 

@@ -10,8 +10,8 @@ export class BidService {
 
     constructor(private http: HttpClient, private router: Router) {}
 
-    bidsubmit( bidAmount:number, timeDuration:number, userId:string, title:string,  bidDescription: string, username:string){
-        const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId,title:title, bidDescription: bidDescription, username: username};
+    bidsubmit( bidAmount:number, timeDuration:number, bidDescription: string, userId:string, title:string, username:string){
+        const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , bidDescription: bidDescription, userId :userId,title:title, username: username};
         this.http.post('/api/submitbid', bidData).subscribe(response=>{
         console.log(response);
            })

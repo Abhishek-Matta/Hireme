@@ -1,12 +1,12 @@
-
-
 <app-header></app-header>
 <br><br>
+
+<div toastContainer></div>
 
 <div class="row" >
   <div class="col-sm-1"></div>
   <div class="col-sm-6">
-    <h3>Projects I placed a bid upon</h3><hr>
+    <h3 (click)="ss()">Projects I placed a bid upon</h3><hr>
     <div *ngIf="userbidded; else elseBlock">
       <div *ngFor="let b of specific_bids">
           <table class="table">
@@ -85,7 +85,7 @@
                   <td>{{b.bidAmount}}</td>
                   <td>{{b.timeDuration}}</td>
                   <td>{{b.bidDescription}}</td>
-                  <td><button class="btn btn-primary" (click)="goToLink('chat-page')" >Chat with {{b.username}} </button></td>
+                  <td><button class="btn btn-primary" (click)="goToLink( b.username)" >Chat with {{b.username}} </button></td>
                 </tr>
 
               </tbody>

@@ -15,7 +15,6 @@ export class PostProjectComponent implements OnInit {
   private show2var: boolean = false;
   private show3var: boolean = false;
   token;
-  myfile:any;
   constructor(private router:Router,private http:HttpClient){}
 
   ngOnInit() {

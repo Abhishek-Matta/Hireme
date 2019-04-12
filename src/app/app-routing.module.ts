@@ -18,10 +18,11 @@ const routes: Routes = [
   {path:'post-project', component:PostProjectComponent},
   {path:'browse-projects', component:BrowseProjectsComponent, /*canActivate:[AuthGuard]*/},
   {path:'browse-projects/:id', component:BrowseProjectsComponent, /*canActivate:[AuthGuard]*/},
-  {path:'chat-page', component:ChatPageComponent},
+  { path: 'chat-page', component: ChatPageComponent },
+  {path:'chat-page/:x', component:ChatPageComponent},
   {path:'profile', component:ProfileComponent}
 ];
-  
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

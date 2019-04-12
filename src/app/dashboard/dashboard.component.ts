@@ -5,6 +5,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { IBids } from '../frontend models/bids';
 import { ProjectsService } from '../services/projects.service';
 import { IProject } from '../frontend models/project';
+import { IchatInfo } from '../frontend models/chatInfo';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +16,7 @@ import { IProject } from '../frontend models/project';
   styleUrls: []
 })
 export class DashboardComponent implements OnInit {
-  public username;
+  public username:string;
   private token: string;
   public id: string;
   specific_bids: IBids[] = [];
@@ -20,29 +24,51 @@ export class DashboardComponent implements OnInit {
   userbidded: boolean;
   userposted: boolean;
   bids: IBids[] = [];
+  otheruser:string;
+  chatInfo: IchatInfo[];
+  sender: string;
+  room:string;
 
 
-  constructor(private router:Router, private authService:AuthService,private projectService: ProjectsService) {}
+  constructor(private router:Router, private authService:AuthService, private projectService: ProjectsService,  private toastr:ToastrService, private http:HttpClient) {}
 
     ngOnInit(){
      this.token = localStorage.getItem('token');
      const helper = new JwtHelperService();
      this.id = localStorage.getItem('userId');
      const decodedToken = helper.decodeToken(this.token);
-     this.username=decodedToken.user.username;
+      this.username = decodedToken.user.username;
 
-      window.open('chat-page', "_blank", "height=500, width=400");
+      let url = "/api/getchatInfo";
+      this.http.get<{ success: Boolean, message: String, chatInfo: IchatInfo[] }>(url).subscribe(data => {
+
+        for (let i = 0; i < data.chatInfo.length; i++){
+
+          if (data.chatInfo[i].receiver==this.username) {
+
+            this.toastr.success('New Message', data.chatInfo[i].sender + ' wants to chat with you').onTap
+              .subscribe(() => this.toasterClickedHandler(data.chatInfo[i].room));
+
+
+
+            break;
+          }
+
+        }
+     })
 
      this.authService.getbids()
      .subscribe(data=>
       {
 
-        for(let i=0;i<data.bids.length;i++)
+       this.bids = data.bids;
+
+        for(let i=0;i<this.bids.length;i++)
         {
-          if(data.bids[i].userId===this.id)
+          if(this.bids[i].userId===this.id)
           {
-            this.specific_bids.push(data.bids[i]);
-            this.userbidded=true;
+            this.specific_bids.push(this.bids[i]);
+            this.userbidded = true;
           }
           else
           {
@@ -68,14 +94,30 @@ export class DashboardComponent implements OnInit {
           }
       })
 
-      this.authService.getbids()
-      .subscribe(data=>{
-        this.bids = data.bids;
-
-      });
      }
 
-  goToLink(url:string) {
-    window.open(url, "_blank","height=500, width=400");
-     }
-}
+  goToLink( otheruser: string ) {
+    this.otheruser = otheruser;
+    let room:string = this.username + this.otheruser;
+  let wholeUrl  = "chat-page/" + room;
+    window.open(wholeUrl, "_blank", "height=300, width=400");
+
+
+
+    this.http.post('/api/chatInfoSubmit', {
+      room: room,
+      sender: this.username,
+      receiver:this.otheruser
+   }).subscribe((res:any)=>{
+      console.log(res);
+   })
+  }
+
+  toasterClickedHandler(room:string) {
+    let wholeUrl  = "chat-page/" + room;
+    window.open(wholeUrl, "_blank", "height=300, width=400");
+    this.http.delete('/api/chatInfoDelete/'+ room).subscribe((data)=>console.log(data));
+  }
+  }
+
+

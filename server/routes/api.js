@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 var User = require('../models/user');
 var Project = require('../models/project');
 var Bid = require('../models/bid');
+var ChatInfo = require('../models/chatinfo');
 
 
 
@@ -111,8 +112,8 @@ router.post('/submitbid' , function(req, res){
         bidAmount:  req.body.bidAmount,
         timeDuration : req.body.timeDuration,
         userId: req.body.userId,
-      title: req.body.title,
-      username: req.body.username,
+        title: req.body.title,
+        username: req.body.username,
         bidDescription: req.body.bidDescription
     });
     bid.save(function(err, result){
@@ -146,5 +147,54 @@ router.get('/getbids/', function (req, res) {
         }
     })
 });
+
+router.post('/chatInfoSubmit' , function(req, res){
+  var chatInfo = new ChatInfo({
+    room: req.body.room,
+    sender: req.body.sender,
+    receiver:req.body.receiver
+  });
+  chatInfo.save(function(err, result){
+      if(err){
+          return res.status(500).json({
+              message : 'error while submitting chat Info',
+              error : err
+          })
+      }
+      res.status(201).json({
+          message: 'Chat Info submited',
+          obj: result
+      });
+  });
+});
+
+router.get('/getchatInfo/', function (req, res) {
+  ChatInfo.find({}).exec((err,data)=>{
+      if(err){
+          return res.status(500).json({
+              message: 'Error occurred while finding chatInfo',
+              error: err
+          });
+      }
+      else{
+          res.status(201).json({
+              success:true,
+              message: 'All chatInfos',
+              chatInfo: data
+          });
+      }
+  })
+});
+
+router.delete('/chatInfoDelete/:room',function(req,res){
+  console.log("deleting a chatInfo")
+  ChatInfo.findOneAndDelete({"room":req.params.room},function(err,deletedChatInfo){
+      if(err){
+          res.send("Error deleting chatInfo")
+      }else{
+          res.json(deletedChatInfo)
+      }
+  })
+})
 
 module.exports = router;

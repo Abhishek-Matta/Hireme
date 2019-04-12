@@ -3,15 +3,15 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs';
 import { AuthData } from "../models/auth-data.model";
-import { BidData } from "../models/bid-data.model";
 import { IBids } from "../../frontend models/bids";
 import { AuthData2 } from "../models/auth-data2.model";
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private router: Router, private toastr:ToastrService) {}
 
     createUser(email: string, password: string, username:string) {
         const authData2: AuthData2 = { email: email, password: password, username:username };
@@ -50,15 +50,10 @@ export class AuthService {
             }
 
           })
+          // this.toastr.success('Hello world!', 'Toastr fun!');
 
             }
 
-            // bidsubmit(  bidAmount:number, timeDuration:number, userId:string, title:string,  bidDescription: string, username:string)){
-            //   const bidData:BidData ={bidAmount:bidAmount, timeDuration:timeDuration , userId :userId,title:title, bidDescription: bidDescription, username: username};
-            //   this.http.post('/api/submitbid', bidData).subscribe(response=>{
-            //     console.log(response);
-            //   })
-            // }
 
          logout(){
           localStorage.clear();

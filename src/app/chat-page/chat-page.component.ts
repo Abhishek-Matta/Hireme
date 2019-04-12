@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ChatService } from '../services/chat.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-chat',
     templateUrl: './chat-page.component.html',
@@ -8,25 +10,30 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class ChatPageComponent {
 
-  user = this.getUsername();
 
-  room: String = "lobby" ;
-    messageText:String;
+  user = this.getUsername();
+  room: String ;
+  messageText: String;
+
+
+
+
     messageArray:Array<{user:String,message:String}> = [];
-    constructor(private _chatService:ChatService){
-        this._chatService.newUserJoined()
+    constructor(private chatService:ChatService, private route:ActivatedRoute){
+        this.chatService.newUserJoined()
         .subscribe(data=> this.messageArray.push(data));
 
-        this._chatService.userLeftRoom()
+        this.chatService.userLeftRoom()
         .subscribe(data=>this.messageArray.push(data));
 
-        this._chatService.newMessageReceived()
+        this.chatService.newMessageReceived()
           .subscribe(data => this.messageArray.push(data));
 
-      this._chatService.joinRoom({ user: this.user, room: this.room });
+      this.chatService.joinRoom({ user: this.user, room: this.room });
     }
 
   ngOnInIt() {
+    this.room = this.route.snapshot.params['x']
 
   }
 
@@ -36,17 +43,17 @@ export class ChatPageComponent {
     const decodedToken = helper.decodeToken(token);
     return decodedToken.user.username;
   }
-    join(){
-        this._chatService.joinRoom({user:this.user, room:this.room});
-    }
+  join() {
+    this.chatService.joinRoom({ user: this.user, room: this.room });
+  }
 
     leave(){
-        this._chatService.leaveRoom({user:this.user, room:this.room});
+        this.chatService.leaveRoom({user:this.user, room:this.room});
     }
 
     sendMessage()
     {
-        this._chatService.sendMessage({user:this.user, room:this.room, message:this.messageText});
+        this.chatService.sendMessage({user:this.user, room:this.room, message:this.messageText});
     }
 
 }
